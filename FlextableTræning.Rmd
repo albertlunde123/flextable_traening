@@ -1,0 +1,57 @@
+---
+title: "Flextable træning"
+output:
+  pdf_document: default
+  word_document: default
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+library(flextable)
+library(officer)
+library(pagedown)
+myft <- flextable(
+  head(mtcars), 
+  col_keys = c("am", "carb", "gear", "mpg", "drat" ))
+```
+
+Her er den første simple tabel. Jeg kan tilføje kommandoer på tabellen efterfølgende. 
+
+```{r}
+myft
+```
+
+Her putter jeg "vanilla" på som er et template.
+
+```{r}
+myft <- theme_vanilla(myft)
+```
+
+Jeg kan også samle rækker eller kolonner hvis de har samme værdi. I denne næste tabel samler jeg "am" og "carb". Jeg angiver at de er kolonner med "j", havde de været rækker skulle jeg bruge "i". Jeg kan desuden ændre navne i headeren.
+
+```{r}
+myft1 <- merge_v(myft, j = c("am", "carb"))
+myft1 <- set_header_labels(myft1, carb = "# carb")
+myft1
+```
+
+Nu demonstrerer jeg en samling af rækker.
+
+```{r}
+myft2 <- merge_h(myft, i = 1:3)
+autofit(myft2)
+```
+
+Jeg kan også ændre på farver, font, baggrund etc. i min tabel.
+
+```{r}
+myft <- italic(myft, j = 1)
+myft <- bg(myft, bg = "#C90000", part = "header" )
+myft <- bg(myft, bg = "#3E9FD7", part = "body")
+myft <- color(myft, color = "white" , part = "all")
+myft <- bold(myft, ~ drat > 3.5, ~ drat, bold = TRUE)
+myft
+```
+
+
+
