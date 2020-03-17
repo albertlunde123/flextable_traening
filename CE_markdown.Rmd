@@ -1,0 +1,26 @@
+---
+title: "[Title]"
+author: "[Name]"
+date: "[Date]"
+
+output: 
+  word_document:
+    reference_docx: CE_markdown_ref_final.docx
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+# Heading 1
+
+tekst
+
+## Heading 2
+
+tekst
+
+### Heading 3
+
+tekst
+
